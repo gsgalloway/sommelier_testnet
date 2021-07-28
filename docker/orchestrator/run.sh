@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -u
 set -e
 
@@ -12,6 +12,9 @@ CONFIG_FILE=$HOME/gorc/config.toml
 # pass the geth and cosmos RPC hosts through from env vars into the config file
 sed -i s/ETH_RPC_HOST_PLACEHOLDER/$ETH_RPC_HOST/g $CONFIG_FILE
 sed -i s/COSMOS_GRPC_HOST_PLACEHOLDER/$COSMOS_GRPC_HOST/g $CONFIG_FILE
+
+./wait-for-it.sh -t 0 "$COSMOS_GRPC_HOST"
+./wait-for-it.sh -t 0 "$ETH_RPC_HOST"
 
 # restore orchestrator key with gorc
 gorc --config $CONFIG_FILE keys cosmos recover orchestrator "$COSMOS_ORCHESTRATOR_MNEMONIC"

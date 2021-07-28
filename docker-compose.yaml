@@ -3,10 +3,12 @@ version: "3.9"
 services:
     geth:
         image: "ethereum/client-go:latest"
-        command: "--syncmode light --goerli --http --cache 16 --datadir /geth-data"
+        command: "--syncmode light --goerli --http --cache 16 --datadir /geth-data -http --http.addr 0.0.0.0 --http.api personal,eth,net,web3 --rpcvhosts=*"
         volumes:
             - geth-data:/geth-data
         restart: unless-stopped
+        ports:
+            - "8545:8545"
     sommelier:
         build:
             context: ./docker/sommelier

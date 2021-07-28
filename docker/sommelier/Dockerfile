@@ -18,4 +18,6 @@ COPY app.toml config.toml /root/.sommelier/config/
 
 COPY run.sh /run.sh
 
+EXPOSE 9090
+
 ENTRYPOINT /run.sh
