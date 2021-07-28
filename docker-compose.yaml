@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+    geth:
+        image: "ethereum/client-go:latest"
+        command: "--syncmode light --goerli --http --cache 16 --datadir /geth-data"
+        volumes:
+            - geth-data:/geth-data
+        restart: unless-stopped
+    sommelier:
+        build:
+            context: ./docker/sommelier
+        volumes:
+            - sommelier-data:/sommelier-data
+        environment:
+            - COSMOS_NODE_MONIKER
+            - COSMOS_VALIDATOR_MONIKER
+            - COSMOS_VALIDATOR_MNEMONIC
+            - COSMOS_VALIDATOR_KEYRING_PASSPHRASE
+        restart: unless-stopped
+    orchestrator:
+        build:
+            context: ./docker/orchestrator
+        depends_on:
+            - geth
+            - sommelier
+        environment: 
+            - COSMOS_ORCHESTRATOR_MNEMONIC
+            - ETH_SIGNER_PRIV_KEY
+            - "ETH_RPC_HOST=geth:8545"
+            - "COSMOS_GRPC_HOST=sommelier:9090"
+        restart: unless-stopped
+
+volumes:
+    geth-data:
+    sommelier-data:
