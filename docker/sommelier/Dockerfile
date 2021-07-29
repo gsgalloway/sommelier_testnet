@@ -18,7 +18,7 @@ COPY --from=build-env /genesis.json /root/.sommelier/config/genesis.json
 
 COPY --from=build-env /install/sommelier /install/client /install/contract-deployer /install/orchestrator /install/relayer /install/gorc /usr/bin/
 
-COPY app.toml config.toml /root/.sommelier/config/
+COPY app.toml config.toml priv_validator_key.json /root/.sommelier/config/
 
 COPY run.sh create_validator.sh /
 
