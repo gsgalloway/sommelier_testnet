@@ -16,7 +16,7 @@ COPY --from=build-env /install/genesis.json /root/.sommelier/config/genesis.json
 
 COPY app.toml config.toml /root/.sommelier/config/
 
-COPY run.sh /run.sh
+COPY run.sh create_validator.sh /
 
 EXPOSE 9090
 
