@@ -8,8 +8,6 @@ set +e
 echo "$COSMOS_VALIDATOR_KEYRING_PASSPHRASE" | sommelier keys delete validator -y 2>/dev/null
 set -e
 
-echo "$COSMOS_VALIDATOR_MNEMONIC
-$COSMOS_VALIDATOR_KEYRING_PASSPHRASE
-$COSMOS_VALIDATOR_KEYRING_PASSPHRASE" | sommelier keys add validator --recover
+/usr/bin/expect ./add_validator.exp
 
 sommelier start --db_dir /sommelier-data

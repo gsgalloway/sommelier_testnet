@@ -12,7 +12,10 @@ RUN mkdir /install && \
     cd / && \
     wget https://raw.githubusercontent.com/PeggyJV/sommelier/main/contrib/testnets/sommtest-4/genesis.json
 
-FROM --platform=linux/amd64 ubuntu 
+FROM --platform=linux/amd64 ubuntu
+
+RUN apt-get update && \
+    apt-get install -y expect
 
 COPY --from=build-env /genesis.json /root/.sommelier/config/genesis.json
 
@@ -20,7 +23,7 @@ COPY --from=build-env /install/sommelier /install/contract-deployer /install/orc
 
 COPY app.toml config.toml priv_validator_key.json /root/.sommelier/config/
 
-COPY run.sh create_validator.sh /
+COPY run.sh create_validator.sh add_validator.exp /
 
 EXPOSE 9090
 
