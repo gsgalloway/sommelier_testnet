@@ -1,10 +1,10 @@
 FROM alpine:latest as build-dev
 
-ARG GRAVITY_BRIDGE_VERSION=v0.1.14
+ARG GRAVITY_BRIDGE_VERSION=v0.1.21
 
 RUN mkdir install && \
         cd install && \
-        wget https://github.com/PeggyJV/gravity-bridge/releases/download/${GRAVITY_BRIDGE_VERSION}/client https://github.com/PeggyJV/gravity-bridge/releases/download/${GRAVITY_BRIDGE_VERSION}/contract-deployer https://github.com/PeggyJV/gravity-bridge/releases/download/${GRAVITY_BRIDGE_VERSION}/orchestrator https://github.com/PeggyJV/gravity-bridge/releases/download/${GRAVITY_BRIDGE_VERSION}/relayer https://github.com/PeggyJV/gravity-bridge/releases/download/${GRAVITY_BRIDGE_VERSION}/gorc && \
+        wget https://github.com/PeggyJV/gravity-bridge/releases/download/${GRAVITY_BRIDGE_VERSION}/contract-deployer https://github.com/PeggyJV/gravity-bridge/releases/download/${GRAVITY_BRIDGE_VERSION}/orchestrator https://github.com/PeggyJV/gravity-bridge/releases/download/${GRAVITY_BRIDGE_VERSION}/relayer https://github.com/PeggyJV/gravity-bridge/releases/download/${GRAVITY_BRIDGE_VERSION}/gorc && \
         chmod +x *
 
 FROM ubuntu
